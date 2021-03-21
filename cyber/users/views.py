@@ -39,7 +39,7 @@ def login():
 
             login_user(user)
             flash('Logged in successfully.')
-            aes = cyberSecurity("secret")
+            aes = cyberSecurity(form.password.data)
             print("login")
             next = request.args.get('next')
 
