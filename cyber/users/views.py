@@ -6,7 +6,6 @@ from cyber.models import User, BlogPost
 from cyber.users.forms import RegistrationForm, LoginForm, UpdateUserForm
 from cyber.users.picture_handler import add_profile_pic
 
-
 users = Blueprint('users', __name__)
 
 @users.route('/register', methods=['GET', 'POST'])

@@ -24,12 +24,8 @@ def create_post():
 
     return render_template('create_post.html',form=form)
 
-
-# int: makes sure that the blog_post_id gets passed as in integer
-# instead of a string so we can look it up later.
 @blog_posts.route('/<int:blog_post_id>')
 def blog_post(blog_post_id):
-    # grab the requested blog post by id number or return 404
     blog_post = BlogPost.query.get_or_404(blog_post_id)
     return render_template('blog_post.html',title=blog_post.title,
                             date=blog_post.date,post=blog_post
@@ -40,7 +36,6 @@ def blog_post(blog_post_id):
 def update(blog_post_id):
     blog_post = BlogPost.query.get_or_404(blog_post_id)
     if blog_post.author != current_user:
-        # Forbidden, No Access
         abort(403)
 
     form = BlogPostForm()
@@ -50,8 +45,6 @@ def update(blog_post_id):
         db.session.commit()
         flash('Post Updated')
         return redirect(url_for('blog_posts.blog_post', blog_post_id=blog_post.id))
-    # Pass back the old blog post information so they can start again with
-    # the old text and title.
     elif request.method == 'GET':
         form.title.data = blog_post.title
         form.text.data = blog_post.text

@@ -6,9 +6,7 @@ from flask_wtf.file import FileField, FileAllowed
 
 from flask_login import current_user
 from cyber.models import User
-
-
-
+from CyberSecurity import cyberSecurity
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -36,6 +34,11 @@ class UpdateUserForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(),Email()])
     username = StringField('Username', validators=[DataRequired()])
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+    print(username)
+    print(picture)
+    aes = cyberSecurity("secret")
+    
+    aes.encryptFile("C://Users//maniv//workspace//Cyber-Secure//cyber//static//profile_pics//test.txt")
     submit = SubmitField('Update')
 
     def validate_email(self, field):
