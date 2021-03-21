@@ -1,3 +1,4 @@
+import os
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from cyber import db
@@ -5,6 +6,9 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from cyber.models import User, BlogPost
 from cyber.users.forms import RegistrationForm, LoginForm, UpdateUserForm
 from cyber.users.picture_handler import add_profile_pic
+from CyberSecurity import cyberSecurity
+
+global aes
 
 users = Blueprint('users', __name__)
 
@@ -25,6 +29,7 @@ def register():
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():
+    global aes
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -34,7 +39,8 @@ def login():
 
             login_user(user)
             flash('Logged in successfully.')
-
+            aes = cyberSecurity("secret")
+            print("login")
             next = request.args.get('next')
 
             if next == None or not next[0]=='/':
@@ -43,20 +49,25 @@ def login():
             return redirect(next)
     return render_template('login.html', form=form)
 
-
-
-
 @users.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('core.index'))
 
-
 @users.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
-
+    global aes
     form = UpdateUserForm()
+
+    if os.path.isfile("C://Users//maniv//workspace//Cyber-Secure//cyber//static//profile_pics//test.txt"):
+        print("ENCRYPT")
+        aes.encryptFile("C://Users//maniv//workspace//Cyber-Secure//cyber//static//profile_pics//test.txt")
+    else:
+        print("DECRYPT")
+        aes.decryptFile("C://Users//maniv//workspace//Cyber-Secure//cyber//static//profile_pics//test.txt.enc")
+
+    print("DONE")
 
     if form.validate_on_submit():
         print(form)

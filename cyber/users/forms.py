@@ -7,15 +7,15 @@ from flask_wtf.file import FileField, FileAllowed
 
 from flask_login import current_user
 from cyber.models import User
-from CyberSecurity import cyberSecurity
+#from CyberSecurity import cyberSecurity
 
-global aes
+#global aes
 
 class LoginForm(FlaskForm):
-    global aes
+#    global aes
 
-    aes = cyberSecurity("secret")
-    print("object")
+#    aes = cyberSecurity("secret")
+#    print("object")
     #print(aes)
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -42,20 +42,10 @@ class UpdateUserForm(FlaskForm):
     global aes
     email = StringField('Email', validators=[DataRequired(),Email()])
     username = StringField('Username', validators=[DataRequired()])
-    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
-    #print(username)
-#    print(picture)
-    print("Hurray")
+    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'txt'])])
 
-    if os.path.isfile("C://Users//maniv//workspace//Cyber-Secure//cyber//static//profile_pics//test.txt"):
-        print("ENCRYPT")
-        aes.encryptFile("C://Users//maniv//workspace//Cyber-Secure//cyber//static//profile_pics//test.txt")
-    else:
-        print("DECRYPT")
-        aes.decryptFile("C://Users//maniv//workspace//Cyber-Secure//cyber//static//profile_pics//test.txt.enc")
-
-    print("DONE")
     submit = SubmitField('Update')
+    submit2 = SubmitField('Run')
 
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
