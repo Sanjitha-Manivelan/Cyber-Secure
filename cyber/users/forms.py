@@ -7,20 +7,11 @@ from flask_wtf.file import FileField, FileAllowed
 
 from flask_login import current_user
 from cyber.models import User
-#from CyberSecurity import cyberSecurity
-
-#global aes
 
 class LoginForm(FlaskForm):
-#    global aes
-
-#    aes = cyberSecurity("secret")
-#    print("object")
-    #print(aes)
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Log In')
-
 
 class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(),Email()])
