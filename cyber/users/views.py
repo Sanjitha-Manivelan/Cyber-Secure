@@ -58,14 +58,15 @@ def logout():
 @login_required
 def account():
     global aes
+    filePath = "C://Users//maniv//workspace//Cyber-Secure//cyber//static//profile_pics//"
     form = UpdateUserForm()
-
-    if os.path.isfile("C://Users//maniv//workspace//Cyber-Secure//cyber//static//profile_pics//test.txt"):
+    
+    if os.path.isfile(filePath + "test.txt"):
         print("ENCRYPT")
-        aes.encryptFile("C://Users//maniv//workspace//Cyber-Secure//cyber//static//profile_pics//test.txt")
+        aes.encryptFile(filePath + "test.txt")
     else:
         print("DECRYPT")
-        aes.decryptFile("C://Users//maniv//workspace//Cyber-Secure//cyber//static//profile_pics//test.txt.enc")
+        aes.decryptFile(filePath + "test.txt.enc")
 
     print("DONE")
 

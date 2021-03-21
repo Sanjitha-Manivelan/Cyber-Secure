@@ -44,8 +44,7 @@ class UpdateUserForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'txt'])])
 
-    submit = SubmitField('Update')
-    submit2 = SubmitField('Run')
+    submit = SubmitField('Cyber')
 
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
