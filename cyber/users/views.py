@@ -8,6 +8,7 @@ from cyber.users.forms import RegistrationForm, LoginForm, UpdateUserForm
 from cyber.users.picture_handler import add_profile_pic
 from CyberSecurity import cyberSecurity
 
+
 global aes
 
 users = Blueprint('users', __name__)
@@ -58,9 +59,7 @@ def logout():
 @login_required
 def account():
     global aes
-    filePath = "C://Users//maniv//workspace//Cyber-Secure//cyber//static//profile_pics//"
-
-
+    filePath = "C://workspace//Cyber-Secure//cyber//static//profile_pics//"
 
     form = UpdateUserForm()
 
